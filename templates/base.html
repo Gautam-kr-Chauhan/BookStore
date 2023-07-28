@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStore {% block title %}{% endblock title %} </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% comment %} <img src="{% static 'image/bird_img.webp' %}" alt=""> {% endcomment %}
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <h3>BookStore</h3>
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'aboutus' %}">About</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'all_books' %}">Books</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  welcome,{{user.first_name}}
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'profile' %}">profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'orders' %}">oreders</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'signout' %}">log out</a></li>
+                </ul>
+              </li>
+
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">SignUp</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'signin' %}">SignIn</a>
+              </li>
+              {% endif %}
+              
+              
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    {% comment %} <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'aboutus' %}">About</a>
+    </nav> {% endcomment %}
+
+    {% block content %}
+        
+    {% endblock content %}
+    <footer class="bg-light">
+        &copy; 2023 BookStore
+    </footer>
+    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+    {% block extrajs %}
+      
+    {% endblock extrajs %}
+    
+
+</body>
+</html>

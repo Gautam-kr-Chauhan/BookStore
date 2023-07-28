@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} || About us{% endblock title %}
+{% block content %}
+    <h1>About us template</h1>
+    <h3>{{name}} is {{age}} years old</h3>
+    {% comment  %}for multi line comment {% endcomment %}
+    {# If statement #}
+    {% if num1 > num2 %}
+        <h2>{{num1}} is greater</h2>
+    {% else %}
+        <h2>{{num2}} is greater</h2>
+    {% endif %}
+    {# Decleration of variable #}
+    {% with x=5  %}
+        {{x}}
+    {% endwith %}
+    {# LOOPS #}
+    <ul>
+        {% for i in nums %}
+            <li>{{i}}</li>
+        {% endfor %}
+    </ul>
+    <table>
+        {% for k,v in students.items %}
+            <tr>
+               <td>{{k}}</td> <td>{{v}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <table border="1">
+        <th>Roll</th><th>Name</th><th>1st-sem</th><th>2nd-sem</th><th>3rd-sem</th><th>4th-sem</th>
+        {% for roll,result in results.items %}
+            <tr>
+                <td>{{roll}}</td>
+                <td>{{result.name}}</td>
+                {% for a in result.cgpa %}
+                    <td>{{a}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}
